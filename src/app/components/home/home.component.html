@@ -1,0 +1,49 @@
+<section class="hero-section">
+    <ngb-carousel
+      *ngIf="images"
+      [showNavigationArrows]="true"
+      [showNavigationIndicators]="true"
+      [interval]="3000"
+      [pauseOnHover]="pauseOnHover"
+      [pauseOnFocus]="pauseOnFocus"
+      (slide)="onSlide($event)">
+      <ng-template ngbSlide *ngFor="let img of images">
+        <div class="picsum-img-wrapper">
+          <img [src]="img" alt="Random first slide" class="hero-image" />
+        </div>
+        <div class="carousel-caption">
+          <h3>Comfortable Bus Travel</h3>
+          <p>Book your tickets online and enjoy the journey</p>
+          <a routerLink="/search" class="btn btn-primary btn-lg">Book Now</a>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </section>
+  
+  <section class="features-section py-5">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-bus fa-3x"></i>
+          </div>
+          <h3>Wide Network</h3>
+          <p>Travel to multiple destinations across the country</p>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-ticket-alt fa-3x"></i>
+          </div>
+          <h3>Easy Booking</h3>
+          <p>Simple and fast online booking process</p>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-icon mb-3">
+            <i class="fas fa-shield-alt fa-3x"></i>
+          </div>
+          <h3>Safe Travel</h3>
+          <p>Your safety is our top priority</p>
+        </div>
+      </div>
+    </div>
+  </section>

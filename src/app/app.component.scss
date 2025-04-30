@@ -1,0 +1,12 @@
+.footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .navbar-brand {
+    font-weight: 600;
+  }
+  
+  main {
+    min-height: calc(100vh - 56px - 120px); // Adjust based on header/footer height
+  }

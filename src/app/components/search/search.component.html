@@ -1,0 +1,68 @@
+<div class="search-container py-5">
+    <div class="container">
+      <div class="search-card card shadow">
+        <div class="card-body p-4">
+          <h2 class="text-center mb-4">Search Bus Routes</h2>
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label for="origin" class="form-label">From</label>
+              <input type="text" class="form-control" id="origin" [(ngModel)]="origin" placeholder="Origin">
+            </div>
+            <div class="col-md-3">
+              <label for="destination" class="form-label">To</label>
+              <input type="text" class="form-control" id="destination" [(ngModel)]="destination" placeholder="Destination">
+            </div>
+            <div class="col-md-3">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" class="form-control" id="date" [(ngModel)]="date">
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+              <button class="btn btn-primary w-100" (click)="search()" [disabled]="isLoading">
+                <span *ngIf="!isLoading">Search</span>
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+          <div class="text-end mt-2">
+            <button class="btn btn-outline-secondary btn-sm" (click)="clearFilters()">Clear Filters</button>
+          </div>
+        </div>
+      </div>
+  
+      <div class="results-container mt-4">
+        <div *ngIf="filteredRoutes.length === 0" class="text-center py-5">
+          <h4>No routes found</h4>
+          <p>Try adjusting your search criteria</p>
+        </div>
+  
+        <div *ngFor="let route of filteredRoutes" class="route-card card mb-3">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col-md-3">
+                <h5>{{ route.busOperator }}</h5>
+                <div class="text-muted small">{{ route.origin }} to {{ route.destination }}</div>
+              </div>
+              <div class="col-md-2">
+                <div class="text-primary fw-bold">{{ route.departureTime }}</div>
+                <div class="text-muted small">{{ route.date | date }}</div>
+              </div>
+              <div class="col-md-2">
+                <div class="text-primary fw-bold">{{ route.arrivalTime }}</div>
+                <div class="text-muted small">Estimated</div>
+              </div>
+              <div class="col-md-2">
+                <span class="badge bg-success">{{ route.availableSeats }} seats left</span>
+              </div>
+              <div class="col-md-2 text-end">
+                <h4 class="text-primary">KSh {{ route.price }}</h4>
+                <div class="text-muted small">per seat</div>
+              </div>
+              <div class="col-md-1 text-end">
+                <button class="btn btn-primary" (click)="viewRouteDetails(route.id)">Book</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

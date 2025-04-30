@@ -1,12 +1,26 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faBus, faTicketAlt, faUser, faHome, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgbCollapseModule, FontAwesomeModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ticket-booking';
+  isMenuCollapsed = true;
+  title = 'Bus Ticket Booking';
+  currentYear: number = new Date().getFullYear(); // Add this line
+
+
+  // Icons
+  faBus = faBus;
+  faTicketAlt = faTicketAlt;
+  faUser = faUser;
+  faHome = faHome;
+  faSearch = faSearch;
 }
