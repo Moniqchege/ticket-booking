@@ -1,0 +1,109 @@
+.hero {
+  position: relative;
+  background-image: url('https://www.thetrainline.com/cms/media/2865/coach-hub-hero_x1.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 2rem;
+  color: white;
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  max-width: 500px;
+}
+
+.hero-text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 1.1rem;
+  color: #d6f2ff;
+}
+
+.booking-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 450px;
+  position: absolute;
+  right: 2rem;
+  top: 5%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  color: black;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+input[type='text'],
+input[type='datetime-local'] {
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.trip-type {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.trip-type button {
+  flex: 1;
+  padding: 0.5rem;
+  background: white;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.trip-type button:last-child {
+  border-right: 1px solid #ccc;
+}
+
+.trip-type button.active {
+  border: 2px solid #4e44f5;
+  color: #4e44f5;
+  font-weight: bold;
+}
+
+.passenger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stay-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cta {
+  background: #00b388;
+  color: white;
+  padding: 0.8rem;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cta:hover {
+  background: #00996f;
+}

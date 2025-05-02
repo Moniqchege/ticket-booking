@@ -1,35 +1,63 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
   <div class="container">
-    <a class="navbar-brand" routerLink="/">
-      <fa-icon [icon]="faBus" class="me-2"></fa-icon>
-      {{ title }}
+    <a class="navbar-brand d-flex align-items-center" routerLink="/">
+      <img
+        src="https://static.trainlinecontent.com/content/vul/logos/trainline-mint.svg"
+        alt="Trainline Logo"
+        width="140"
+        class="me-2"
+      />
     </a>
-    <button aria-label="close" class="navbar-toggler" type="button" 
-            (click)="isMenuCollapsed = !isMenuCollapsed">
+    <button
+      aria-label="Toggle navigation"
+      class="navbar-toggler"
+      type="button"
+      (click)="isMenuCollapsed = !isMenuCollapsed"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-            <fa-icon [icon]="faHome" class="me-1"></fa-icon> Home
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="toggleCollapseOnNavClick()"
+          >
+            Home
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/search" routerLinkActive="active">
-            <fa-icon [icon]="faSearch" class="me-1"></fa-icon> Search Buses
+          <a
+            class="nav-link"
+            routerLink="/search"
+            routerLinkActive="active"
+            (click)="toggleCollapseOnNavClick()"
+          >
+            <i class="fa-regular fa-heart"></i> Travel Plans
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/my-bookings" routerLinkActive="active">
-            <fa-icon [icon]="faTicketAlt" class="me-1"></fa-icon> My Bookings
+          <a
+            class="nav-link"
+            routerLink="/my-bookings"
+            routerLinkActive="active"
+            (click)="toggleCollapseOnNavClick()"
+          >
+            My Bookings
           </a>
         </li>
       </ul>
-      <div class="d-flex">
-        <a class="btn btn-outline-light" routerLink="/my-bookings">
-          <fa-icon [icon]="faUser" class="me-1"></fa-icon> Account
-        </a>
+      <div class="d-flex ms-3">
+        <button
+          class="btn btn-outline-light"
+          type="button"
+          (click)="openModal(); toggleCollapseOnNavClick()"
+        >
+          <i class="fa-solid fa-user"></i> Signin
+        </button>
       </div>
     </div>
   </div>
@@ -39,34 +67,120 @@
   <router-outlet></router-outlet>
 </main>
 
-<footer class="footer mt-auto py-3 bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <h5>About Us</h5>
-        <p>We provide comfortable and reliable bus travel services across the country.</p>
+<div class="modal" #loginModal tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-4">
+        <div class="text-center mb-4">
+          <h4 class="modal-title fw-bold" id="authModalTitle">Welcome Back!</h4>
+          <button
+            type="button"
+            class="btn-close position-absolute top-0 end-0 m-3"
+            (click)="closeModal()"
+            data-bs-dismiss="modal"
+            aria-label="close"
+          ></button>
+        </div>
+        @if (isLoginFormVisible()) {
+        <form id="loginForm" class="needs-validation">
+          <div class="mb-3">
+            <input
+              type="email"
+              [(ngModel)]="loginObj.email"
+              name="email"
+              class="form-control"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="password"
+              [(ngModel)]="loginObj.password"
+              name="password"
+              class="form-control"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary w-100 mb-3"
+            (click)="onLogin()"
+          >
+            Login
+          </button>
+          <p class="text-center">
+            Don't have an account?
+            <a
+              id="showSignup"
+              class="text-decoration-none"
+              (click)="toggleForm()"
+              >Sign Up</a
+            >
+          </p>
+        </form>
+        } @else {
+        <form id="signupForm" class="needs-validation cursor-pointer">
+          <div class="mb-3">
+            <input
+              type="text"
+              [(ngModel)]="registerObj.fullName"
+              name="fullName"
+              class="form-control"
+              placeholder="Full Name"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="email"
+              [(ngModel)]="registerObj.email"
+              name="email"
+              class="form-control"
+              placeholder="Email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="password"
+              [(ngModel)]="registerObj.password"
+              name="password"
+              class="form-control"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="password"
+              [(ngModel)]="registerObj.confirmPassword"
+              name="confirmPassword"
+              class="form-control"
+              placeholder="Confirm Password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary w-100 mb-3"
+            (click)="onRegister()"
+          >
+            Sign Up
+          </button>
+          <p class="text-center">
+            Already have an account?
+            <a
+              id="showLogin"
+              class="text-decoration-none"
+              (click)="toggleForm()"
+              >Login</a
+            >
+          </p>
+        </form>
+        }
       </div>
-      <div class="col-md-4">
-        <h5>Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a routerLink="/">Home</a></li>
-          <li><a routerLink="/search">Search Buses</a></li>
-          <li><a routerLink="/my-bookings">My Bookings</a></li>
-        </ul>
-      </div>
-      <div class="col-md-4">
-        <h5>Contact</h5>
-        <address>
-          <strong>Bus Ticket Booking</strong><br>
-          Nairobi, Kenya<br>
-          Email: info&#64;busticketbooking.com<br>
-          Phone: +254 700 000 000
-        </address>
-      </div>
-    </div>
-    <hr>
-    <div class="text-center">
-      <p class="mb-0">&copy; {{ currentYear }} Bus Ticket Booking. All rights reserved.</p>
     </div>
   </div>
-</footer>
+</div>
