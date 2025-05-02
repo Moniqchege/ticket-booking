@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  background-image: url('https://www.thetrainline.com/cms/media/2865/coach-hub-hero_x1.jpg');
+  background-image: url("https://www.thetrainline.com/cms/media/2865/coach-hub-hero_x1.jpg");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -10,7 +10,6 @@
   padding: 2rem;
   color: white;
 }
-
 .hero-text {
   position: absolute;
   bottom: 2rem;
@@ -45,10 +44,11 @@
   margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-input[type='text'],
-input[type='datetime-local'] {
+input[type="text"],
+input[type="datetime-local"] {
   padding: 0.6rem;
   border-radius: 6px;
   border: 1px solid #ccc;
@@ -106,4 +106,54 @@ input[type='datetime-local'] {
 
 .cta:hover {
   background: #00996f;
+}
+
+.suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+}
+
+.suggestions li {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background: #f1f1f1;
+}
+
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .booking-card,
+  .hero-text {
+    position: static;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 1rem;
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .hero-text p {
+    text-align: center;
+  }
 }

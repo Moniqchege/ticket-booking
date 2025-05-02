@@ -1,5 +1,10 @@
 import { Component, ElementRef, signal, ViewChild } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { loginUser, RegisterUser } from './interfaces/user.model';
@@ -16,7 +21,7 @@ import { CommonModule } from '@angular/common';
     NgbCollapseModule,
     FontAwesomeModule,
     FormsModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
@@ -45,11 +50,7 @@ export class AppComponent {
     password: '',
   };
 
-
-  constructor(private router: Router) {
-    // localStorage.removeItem('users');
-    // localStorage.removeItem('loggedInUser');
-  }
+  constructor(private router: Router) {}
 
   ngOnInit() {
     const user = localStorage.getItem('loggedInUser');
@@ -117,12 +118,11 @@ export class AppComponent {
     }
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('loggedInUser');
     this.loggedInUser.set(null);
     this.router.navigate(['/']);
   }
-  
 
   toggleCollapseOnNavClick() {
     if (window.innerWidth < 992) {

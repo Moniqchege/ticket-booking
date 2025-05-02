@@ -1,45 +1,87 @@
-<!-- home.component.html -->
 <div class="hero">
   <div class="booking-card">
-    <form>
+    <form (ngSubmit)="searchTickets()">
       <div class="form-group">
         <label for="from">From</label>
-        <input type="text" id="from" placeholder="City or station" />
+        <input
+          type="text"
+          id="from"
+          [(ngModel)]="from"
+          (input)="filterCities(from, 'from')"
+          [attr.autocomplete]="'off'"
+          placeholder="City or station"
+        />
+        <ul class="suggestions" *ngIf="filteredFromCities.length">
+          <li *ngFor="let city of filteredFromCities" (click)="selectCity(city, 'from')">
+            {{ city }}
+          </li>
+        </ul>
       </div>
+    
       <div class="form-group">
         <label for="to">To</label>
-        <input type="text" id="to" placeholder="City or station" />
+        <input
+          type="text"
+          id="to"
+          [(ngModel)]="to"
+          (input)="filterCities(to, 'to')"
+          [attr.autocomplete]="'off'"
+          placeholder="City or station"
+        />
+        <ul class="suggestions" *ngIf="filteredFromCities.length">
+          <li *ngFor="let city of filteredFromCities" (mousedown)="selectCity(city, 'from')">
+            {{ city }}
+          </li>
+        </ul>
+        
+        <ul class="suggestions" *ngIf="filteredToCities.length">
+          <li *ngFor="let city of filteredToCities" (mousedown)="selectCity(city, 'to')">
+            {{ city }}
+          </li>
+        </ul>
+        
       </div>
-
+    
       <div class="trip-type">
-        <button type="button" class="active">One-way</button>
-        <button type="button">Return</button>
-        <button type="button">Open Return</button>
+        <button type="button" [class.active]="tripType === 'One-way'" (click)="tripType = 'One-way'">One-way</button>
+        <button type="button" [class.active]="tripType === 'Return'" (click)="tripType = 'Return'">Return</button>
+        <button type="button" [class.active]="tripType === 'Open Return'" (click)="tripType = 'Open Return'">Open Return</button>
       </div>
-
+    
       <div class="form-group">
         <label for="date"><strong>Out</strong></label>
-        <input type="datetime-local" id="date" value="2025-05-02T08:00" />
+        <input type="datetime-local" id="date" [(ngModel)]="travelDate" name="date" required />
       </div>
-
+    
       <div class="form-group passenger">
         <label><strong>1 Adult (16+)</strong></label>
-        <a href="#">Add railcards</a>
       </div>
-
+    
       <div class="form-group stay-option">
         <label>
-          <input type="checkbox" checked />
+          <input type="checkbox" [(ngModel)]="openStay" name="openStay" />
           Open places to stay
         </label>
       </div>
-
-      <button type="submit" class="cta">Get cheapest tickets</button>
+    
+      <button type="button" class="cta" (click)="searchTickets()">Check Available Buses</button>
     </form>
+    <div *ngIf="availableBuses.length" class="bus-results">
+      <h3>Available Buses:</h3>
+      <ul>
+        <li *ngFor="let bus of availableBuses">
+          {{ bus.name }} - KES {{ bus.fare }}<br />
+          <small *ngIf="bus.reason">Note: {{ bus.reason }}</small>
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="hero-text">
     <h1>Find cheap bus and coach tickets</h1>
-    <p>Did you know we now offer coach and bus tickets? Find more options for your trip</p>
+    <p>
+      Did you know we now offer coach and bus tickets? Find more options for
+      your trip
+    </p>
   </div>
 </div>
