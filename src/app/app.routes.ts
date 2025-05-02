@@ -7,7 +7,7 @@ import { MyBookingsComponent } from './components/my-bookings/my-bookings.compon
 export const routes: Routes = [
   { path: '', component: HomeComponent, title: 'Home - Bus Ticket Booking' },
   { path: 'search', component: SearchComponent, title: 'Search Buses' },
-  { path: 'book/:id', component: BookingComponent, title: 'Book Ticket' },
+  { path: 'booking', component: BookingComponent, title: 'Book Ticket' },
   { path: 'my-bookings', component: MyBookingsComponent, title: 'My Bookings' },
   { path: '**', redirectTo: '' }
 ];
