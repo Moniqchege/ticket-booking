@@ -13,27 +13,49 @@
     <h3>Book Your Seat</h3>
     <form (ngSubmit)="onSubmit()" *ngIf="!bookingSuccess">
       <label for="name">Name:</label>
-      <input id="name" type="text" [(ngModel)]="bookingData.passengerName" name="name" required />
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="bookingData.passengerName"
+        name="name"
+        required
+      />
 
       <label for="phone">Phone:</label>
-      <input id="phone" type="tel" [(ngModel)]="bookingData.passengerPhone" name="phone" required />
+      <input
+        id="phone"
+        type="tel"
+        [(ngModel)]="bookingData.passengerPhone"
+        name="phone"
+        required
+      />
 
       <label>Seats:</label>
       <div class="seat-selection">
-        <input type="text" [value]="cart.selectedSeats.join(', ')" readonly placeholder="Click to choose seats" />
+        <input
+          type="text"
+          [value]="cart.selectedSeats.join(', ')"
+          readonly
+          placeholder="Click to choose seats"
+        />
         <button type="button" (click)="openSeatModal()">Choose Seats</button>
       </div>
 
       <p>Total: KES {{ calculateTotal() }}</p>
 
-      <button type="submit" [disabled]="isSubmitting || cart.selectedSeats.length === 0">
+      <button
+        type="submit"
+        [disabled]="isSubmitting || cart.selectedSeats.length === 0"
+      >
         Confirm Booking
       </button>
     </form>
 
     <div class="success-message" *ngIf="bookingSuccess">
       <h3>Booking Confirmed!</h3>
-      <p>Your Booking ID is: <strong>{{ bookingId }}</strong></p>
+      <p>
+        Your Booking ID is: <strong>{{ bookingId }}</strong>
+      </p>
     </div>
   </div>
 </div>
@@ -48,10 +70,12 @@
         <div class="seat-row-label">{{ row.seatRowLabel }}</div>
 
         <div class="seat-pair">
-          <button *ngFor="let seat of row.seats.slice(0, 2)"
-                  [ngClass]="seat.status"
-                  class="seat"
-                  (click)="selectSeat(seat)">
+          <button
+            *ngFor="let seat of row.seats.slice(0, 2)"
+            [ngClass]="seat.status"
+            class="seat"
+            (click)="selectSeat(seat)"
+          >
             {{ seat.seatLabel }}
           </button>
         </div>
@@ -59,10 +83,12 @@
         <div class="aisle"></div>
 
         <div class="seat-pair">
-          <button *ngFor="let seat of row.seats.slice(2, 4)"
-                  [ngClass]="seat.status"
-                  class="seat"
-                  (click)="selectSeat(seat)">
+          <button
+            *ngFor="let seat of row.seats.slice(2, 4)"
+            [ngClass]="seat.status"
+            class="seat"
+            (click)="selectSeat(seat)"
+          >
             {{ seat.seatLabel }}
           </button>
         </div>

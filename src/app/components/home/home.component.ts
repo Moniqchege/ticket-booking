@@ -46,19 +46,21 @@ export class HomeComponent {
   ];
   filteredFromCities: string[] = [];
   filteredToCities: string[] = [];
-  availableBuses: { name: string, fare: number, reason?: string }[] = [];
+  availableBuses: { name: string; fare: number; reason?: string }[] = [];
 
   constructor(private router: Router) {}
 
-
-
   filterCities(query: string, type: 'from' | 'to') {
     const trimmedQuery = query.trim().toLowerCase();
-    const filtered = trimmedQuery ? 
-      this.cities.filter(city => city.toLowerCase().startsWith(trimmedQuery)) : 
-      [];
-    
-    type === 'from' ? this.filteredFromCities = filtered : this.filteredToCities = filtered;
+    const filtered = trimmedQuery
+      ? this.cities.filter((city) =>
+          city.toLowerCase().startsWith(trimmedQuery)
+        )
+      : [];
+
+    type === 'from'
+      ? (this.filteredFromCities = filtered)
+      : (this.filteredToCities = filtered);
   }
 
   selectCity(city: string, type: 'from' | 'to') {
@@ -76,27 +78,27 @@ export class HomeComponent {
       alert('Please fill in all required fields.');
       return;
     }
-  
+
     console.log({
       from: this.from,
       to: this.to,
       date: this.travelDate,
       tripType: this.tripType,
-      openStay: this.openStay
+      openStay: this.openStay,
     });
-  
+
     this.availableBuses = [
       { name: 'Easy Coach', fare: 1200 },
       { name: 'Modern Coast', fare: 1500 },
       {
         name: 'Dreamline',
         fare: 1800,
-        reason: 'Luxury coach with WiFi and refreshments included'
-      }
+        reason: 'Luxury coach with WiFi and refreshments included',
+      },
     ];
-  
+
     const selectedBus = {
-      id: 'route-1', // Add a unique ID (in a real app this comes from backend)
+      id: 'route-1',
       origin: this.from,
       destination: this.to,
       date: this.travelDate,
@@ -104,11 +106,9 @@ export class HomeComponent {
       price: this.availableBuses[0].fare,
       departureTime: '08:00 AM',
       arrivalTime: '02:00 PM',
-      availableSeats: 40 // Add availableSeats
+      availableSeats: 40,
     };
-  
+
     this.router.navigate(['/booking'], { state: { busRoute: selectedBus } });
   }
-  
 }
-

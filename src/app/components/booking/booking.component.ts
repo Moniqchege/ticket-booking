@@ -16,6 +16,7 @@ import { Booking, Seat, SeatRow } from '../../interfaces/booking.interface';
 export class BookingComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private dataService = inject(DataService);
+ 
 
   showSeatModal: boolean = false;
 

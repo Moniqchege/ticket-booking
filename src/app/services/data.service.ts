@@ -23,6 +23,32 @@ export class DataService {
       busOperator: 'Modern Coast',
       amenities: ['AC', 'WiFi', 'TV'],
     },
+    {
+      id: uuidv4(),
+      origin: 'Nairobi',
+      destination: 'Mombasa',
+      departureTime: '09:00',
+      arrivalTime: '15:30',
+      price: 1400,
+      seats: 45,
+      availableSeats: 45,
+      date: new Date().toISOString().split('T')[0],
+      busOperator: 'Dreamline',
+      amenities: ['WiFi', 'Snacks'],
+    },
+    {
+      id: uuidv4(),
+      origin: 'Nairobi',
+      destination: 'Mombasa',
+      departureTime: '10:30',
+      arrivalTime: '17:00',
+      price: 1600,
+      seats: 60,
+      availableSeats: 60,
+      date: new Date().toISOString().split('T')[0],
+      busOperator: 'Coast Bus',
+      amenities: ['AC', 'Charging Ports'],
+    }
   ];
 
   constructor() {

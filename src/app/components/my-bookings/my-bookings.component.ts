@@ -15,8 +15,11 @@ export class MyBookingsComponent {
   bookings: Booking[] = [];
 
   constructor(private dataService: DataService) {
-    this.bookings = this.dataService.getBookings();
+    this.bookings = this.dataService.getBookings().sort((a, b) =>
+      new Date(b.bookingDate).getTime() - new Date(a.bookingDate).getTime()
+    );
   }
+  
 
   cancelBooking(id: string): void {
     if (confirm('Are you sure you want to cancel this booking?')) {
